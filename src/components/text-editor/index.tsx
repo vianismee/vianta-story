@@ -23,6 +23,9 @@ export default function TextEditor() {
         class: "min-h-[156px] border rounded-md px-3 py-2 text-[10pt] bg-white",
       },
     },
+    onUpdate: ({ editor }) => {
+      console.log(editor.getJSON());
+    },
   });
   return (
     <div>
