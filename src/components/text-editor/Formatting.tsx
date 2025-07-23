@@ -36,11 +36,6 @@ export function Menubar({ editor }: { editor: Editor | null }) {
       isActive: editor.isActive("heading", { level: 3 }),
     },
     {
-      icon: <Heading4 className="size-4" />,
-      onClick: () => editor.chain().focus().toggleHeading({ level: 4 }).run(),
-      isActive: editor.isActive("heading", { level: 4 }),
-    },
-    {
       icon: <Bold className="size-4" />,
       onClick: () => editor.chain().focus().toggleBold().run(),
       isActive: editor.isActive("bold"),

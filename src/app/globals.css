@@ -179,7 +179,10 @@
   h3 {
     @apply text-xl font-bold;
   }
+  p {
+    @apply text-[13pt] font-sans;
+  }
   blockquote {
-    @apply my-6 pl-4 border-l-[4px] border-primary/70 font-serif text-xl;
+    @apply my-6 pl-4 border-l-[4px] border-primary/70 font-serif font-bold text-xl italic;
   }
 }

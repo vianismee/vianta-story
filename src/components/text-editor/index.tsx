@@ -20,7 +20,8 @@ export default function TextEditor() {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: "min-h-[156px] border rounded-md px-3 py-2 text-[10pt] bg-white",
+        class:
+          "min-h-[500px] border rounded-md px-4 py-6 text-[10pt] bg-white space-y-3",
       },
     },
     onUpdate: ({ editor }) => {
