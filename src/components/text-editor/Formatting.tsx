@@ -1,8 +1,6 @@
 import React from "react";
 
 import {
-  AlignCenter,
-  AlignLeft,
   Bold,
   Heading1,
   Heading2,
@@ -12,11 +10,11 @@ import {
   Quote,
   Strikethrough,
 } from "lucide-react";
-import { Toggle } from "../ui/toggle";
+import { Button } from "../ui/button"; // Ganti import dari Toggle ke Button
 
 import { Editor } from "@tiptap/react";
 
-export default function Menubar({ editor }: { editor: Editor | null }) {
+export function Menubar({ editor }: { editor: Editor | null }) {
   if (!editor) {
     return null;
   }
@@ -25,65 +23,57 @@ export default function Menubar({ editor }: { editor: Editor | null }) {
     {
       icon: <Heading1 className="size-4" />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-      pressed: editor.isActive("heading", { level: 1 }),
+      isActive: editor.isActive("heading", { level: 1 }),
     },
     {
       icon: <Heading2 className="size-4" />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
-      pressed: editor.isActive("heading", { level: 2 }),
+      isActive: editor.isActive("heading", { level: 2 }),
     },
     {
       icon: <Heading3 className="size-4" />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-      pressed: editor.isActive("heading", { level: 3 }),
+      isActive: editor.isActive("heading", { level: 3 }),
     },
     {
       icon: <Heading4 className="size-4" />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 4 }).run(),
-      pressed: editor.isActive("heading", { level: 4 }),
+      isActive: editor.isActive("heading", { level: 4 }),
     },
     {
       icon: <Bold className="size-4" />,
       onClick: () => editor.chain().focus().toggleBold().run(),
-      pressed: editor.isActive("bold"),
+      isActive: editor.isActive("bold"),
     },
     {
       icon: <Italic className="size-4" />,
       onClick: () => editor.chain().focus().toggleItalic().run(),
-      pressed: editor.isActive("italic"),
+      isActive: editor.isActive("italic"),
     },
     {
       icon: <Strikethrough className="size-4" />,
       onClick: () => editor.chain().focus().toggleStrike().run(),
-      pressed: editor.isActive("strike"),
+      isActive: editor.isActive("strike"),
     },
     {
       icon: <Quote className="size-4" />,
       onClick: () => editor.chain().focus().toggleBlockquote().run(),
-      pressed: editor.isActive("blockquote"),
-    },
-    {
-      icon: <AlignLeft className="size-4" />,
-      onClick: () => editor.chain().focus().setTextAlign("left").run(),
-      pressed: editor.isActive({ textAlign: "left" }),
-    },
-    {
-      icon: <AlignCenter className="size-4" />,
-      onClick: () => editor.chain().focus().setTextAlign("center").run(),
-      pressed: editor.isActive({ textAlign: "center" }),
+      isActive: editor.isActive("blockquote"),
     },
   ];
 
   return (
     <div className="border rounded-md p-1 mb-1 space-x-2 z-50 ">
       {Options.map((option, index) => (
-        <Toggle
-          pressed={option.pressed}
-          onPressedChange={option.onClick}
+        <Button
+          variant="ghost" // Opsional: untuk tampilan seperti toggle
+          size="icon" // Opsional: untuk membuat tombol menjadi kotak
           key={index}
+          onClick={option.onClick}
+          className={option.isActive ? "bg-muted text-foreground" : ""} // Kelas untuk style aktif
         >
           {option.icon}
-        </Toggle>
+        </Button>
       ))}
     </div>
   );

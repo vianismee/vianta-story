@@ -3,8 +3,9 @@
 import React from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
-import Menubar from "./Formatting";
+import { Menubar } from "./Formatting";
 import { TextAlign } from "@tiptap/extension-text-align";
+import Blockquote from "@tiptap/extension-blockquote";
 
 export default function TextEditor() {
   const editor = useEditor({
@@ -13,12 +14,13 @@ export default function TextEditor() {
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
+      Blockquote,
     ],
-    content: "<p> Hello World</p>",
+    content: "<blockquote>Hello World</blockquote>",
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: "min-h-[156px] border rounded-md bg-slate-100 px-3 py-2",
+        class: "min-h-[156px] border rounded-md px-3 py-2 text-[10pt] bg-white",
       },
     },
   });
