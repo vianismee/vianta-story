@@ -1,13 +1,22 @@
 "use client";
 
 import React from "react";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, JSONContent, useEditor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Menubar } from "./Formatting";
 import { TextAlign } from "@tiptap/extension-text-align";
 import Blockquote from "@tiptap/extension-blockquote";
+import { Placeholder } from "@tiptap/extensions";
 
-export default function TextEditor() {
+interface TextEditorProps {
+  onChangeContent: (content: JSONContent) => void;
+  initialContent?: JSONContent;
+}
+
+export default function TextEditor({
+  onChangeContent,
+  initialContent,
+}: TextEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -15,8 +24,11 @@ export default function TextEditor() {
         types: ["heading", "paragraph"],
       }),
       Blockquote,
+      Placeholder.configure({
+        placeholder: "Tulis blog mu disini...",
+      }),
     ],
-    content: "<blockquote>Hello World</blockquote>",
+    content: initialContent,
     immediatelyRender: false,
     editorProps: {
       attributes: {
@@ -25,7 +37,7 @@ export default function TextEditor() {
       },
     },
     onUpdate: ({ editor }) => {
-      console.log(editor.getJSON());
+      onChangeContent(editor.getJSON());
     },
   });
   return (

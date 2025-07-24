@@ -4,8 +4,6 @@ import {
   Bold,
   Heading1,
   Heading2,
-  Heading3,
-  Heading4,
   Italic,
   Quote,
   Strikethrough,
@@ -29,11 +27,6 @@ export function Menubar({ editor }: { editor: Editor | null }) {
       icon: <Heading2 className="size-4" />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
       isActive: editor.isActive("heading", { level: 2 }),
-    },
-    {
-      icon: <Heading3 className="size-4" />,
-      onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-      isActive: editor.isActive("heading", { level: 3 }),
     },
     {
       icon: <Bold className="size-4" />,

@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply float-left h-0 pointer-events-none text-secondary-foreground/40;
+}
+
 :root {
   --background: #f9f9f9;
   --foreground: #202020;
@@ -171,18 +176,15 @@
     letter-spacing: var(--tracking-normal);
   }
   h1 {
-    @apply text-3xl font-bold font-serif;
+    @apply text-2xl font-bold font-serif;
   }
   h2 {
-    @apply text-2xl font-bold;
-  }
-  h3 {
-    @apply text-xl font-bold;
+    @apply text-xl font-bold font-serif;
   }
   p {
-    @apply text-[13pt] font-sans;
+    @apply text-[12pt] font-sans;
   }
   blockquote {
-    @apply my-6 pl-4 border-l-[4px] border-primary/70 font-serif font-bold text-xl italic;
+    @apply my-6 pl-4 border-l-[4px] border-primary/70 font-serif font-semibold text-xl;
   }
 }
