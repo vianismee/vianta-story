@@ -20,7 +20,7 @@ export function useBlog(slug?: string) {
             try {
 
                 if(slug) {
-                    const {data, error} = await supabase.from("blog_post").select("*").eq("slug", slug).single()
+                    const {data, error} = await supabase.from("blog_post").select("*").eq("post_slug", slug).single()
                     if(error) throw error
                     setPost(data)
                 } else {

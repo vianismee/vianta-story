@@ -9,7 +9,7 @@ export default function BlogPages() {
   return (
     <div>
       {posts.map((post) => (
-        <Link href={`/blog/${post.slug}`} key={post.id}>
+        <Link href={`/blog/${post.post_slug}`} key={post.id}>
           <h1>{post.title}</h1>
         </Link>
       ))}

@@ -102,7 +102,7 @@ export default function CreateBlogPage() {
       const slug = generateSlug(blogTitle);
       const finalPostedData = {
         title: blogTitle,
-        slug: slug,
+        post_slug: slug,
         content: blogContent,
         header_image_url: headerImageUrl,
       };

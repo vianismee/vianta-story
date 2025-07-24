@@ -1,7 +1,8 @@
 "use client";
 
 import { useBlog } from "@/hooks/use-blog";
-import { use } from "react";
+import { use, useEffect } from "react";
+import { createClient } from "../../../../utils/supabase/client";
 
 export default function BlogPostPage({
   params,
@@ -9,8 +10,31 @@ export default function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-
   const { post, loading, error } = useBlog(slug);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const viewedKey = `viewed-${slug}`;
+    const hasViewd = localStorage.getItem(viewedKey);
+
+    const incrementView = async () => {
+      try {
+        if (!hasViewd) {
+          const { error } = await supabase.rpc("increment_view_count", {
+            post_slug_param: slug, // Nama parameter harus 'post_slug'
+          });
+          if (error) {
+            console.log(error);
+          }
+          localStorage.setItem(viewedKey, "true");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    incrementView();
+  }, [slug, supabase]);
+
   if (loading) {
     return <div className="text-center p-10">Memuat postingan...</div>;
   }
