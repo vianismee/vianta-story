@@ -5,11 +5,12 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import MultipleSelectorControlled from "./MultipleSelectorController";
 import { JSONContent } from "@tiptap/react";
-import { createClient } from "../../../../../utils/supabase/client";
+
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import InputDemo from "@/components/input-12";
-import imageCompression from "browser-image-compression";
+
+import { useUploadBlog } from "@/hooks/use-upload-blog";
 
 const initialContent: JSONContent = {
   type: "doc",
@@ -21,9 +22,11 @@ const initialContent: JSONContent = {
 };
 
 export default function CreateBlogPage() {
+  const { uploadPost } = useUploadBlog();
+
   const [blogTitle, setBlogTittle] = useState("");
   const [blogContent, setBlogContent] = useState<JSONContent>(initialContent);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
+  //  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   // image file handler
   const [blogImage, setBlogImage] = useState<File | null>(null);
@@ -35,93 +38,27 @@ export default function CreateBlogPage() {
     setBlogImagePrev(URL.createObjectURL(file));
   };
 
-  const handleFileRemove = () => {
+  const resetForm = () => {
+    setBlogTittle("");
+    setBlogContent(initialContent); // Reset editor (perlu penyesuaian di TextEditor)
+    if (blogImagePrev) URL.revokeObjectURL(blogImagePrev);
     setBlogImage(null);
-    if (blogImagePrev) {
-      // Penting: Hapus URL objek untuk menghindari memory leak
-      URL.revokeObjectURL(blogImagePrev);
-    }
     setBlogImagePrev(null);
+    // Mungkin juga perlu mereset komponen InputDemo
   };
-
   const handleSubmitePost = async () => {
-    setIsUploading(true);
-    const supabase = createClient();
-
-    let headerImageUrl: string | null = null;
-
     try {
-      if (blogImage) {
-        const options = {
-          maxSizeMB: 0.9,
-          maxWidthOrHeight: 1920,
-          useWebWorker: true,
-        };
-        const compressedImage = await imageCompression(blogImage, options);
-        const safeFileName = compressedImage.name.replace(
-          /[^a-zA-Z0-9.\-_]/g,
-          "_"
-        );
-        const filename = `${Date.now()}_${safeFileName}`;
-        const imageBucket = "blog-images";
-        const { data: uploadData, error } = await supabase.storage
-          .from(imageBucket)
-          .upload(filename, blogImage);
-        if (error) {
-          throw new Error(`Gagal mengunggah gambar: ${error.message}`);
-        }
-
-        const { data: publicUrlData } = await supabase.storage
-          .from(imageBucket)
-          .getPublicUrl(uploadData.path);
-
-        headerImageUrl = publicUrlData.publicUrl;
-      }
-      const generateSlug = (title: string): string => {
-        if (!title) {
-          return "";
-        }
-
-        return (
-          title
-            .toString()
-            .toLowerCase()
-            // 1. Ganti spasi dengan tanda hubung (-)
-            .replace(/\s+/g, "-")
-            // 2. Hapus semua karakter yang bukan huruf, angka, atau tanda hubung
-            .replace(/[^\w\-]+/g, "")
-            // 3. Ganti beberapa tanda hubung berturut-turut menjadi satu saja
-            .replace(/\-\-+/g, "-")
-            // 4. Hapus tanda hubung yang mungkin ada di awal teks
-            .replace(/^-+/, "")
-            // 5. Hapus tanda hubung yang mungkin ada di akhir teks
-            .replace(/-+$/, "")
-        );
-      };
-
-      const slug = generateSlug(blogTitle);
-      const finalPostedData = {
+      const dataToUpload = {
         title: blogTitle,
-        post_slug: slug,
         content: blogContent,
-        header_image_url: headerImageUrl,
+        image: blogImage,
       };
-      const { error } = await supabase
-        .from("blog_post")
-        .insert([finalPostedData])
-        .select();
-      if (error) {
-        console.log(error);
-      } else {
-        toast.success(`Blog ${blogTitle} Masuk Draft`);
-        handleFileRemove();
-        setBlogTittle("");
-        setBlogContent(initialContent);
-      }
+      const newPost = await uploadPost(dataToUpload);
+      toast.success(`Blog ${blogTitle} berhasil di Upload`);
+      resetForm();
+      return newPost;
     } catch (error) {
-      console.log(error);
-    } finally {
-      setIsUploading(false);
+      toast.error(`Gagal menyimpan: ${error}`);
     }
   };
 
