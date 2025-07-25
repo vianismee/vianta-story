@@ -19,45 +19,36 @@ export default function BlogPages() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
-      {/* Gunakan grid untuk layout yang rapi */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Loop melalui data posts untuk membuat card */}
-        {posts.map((post) => (
+    <main className="p-4 flex flex-col gap-5">
+      <section className="flex items-center justify-between w-full border-b-[3px] border-primary pb-6">
+        <h1 className="text-[40pt] w-[40%]">Our Blog Story</h1>
+        <p className="w-[30%] text-[16pt] border-l-[3px] border-primary/50 pl-4 font-medium">
+          Ini adalah cerita perjalanan kami mengunjungi tempat atau destinasi
+          menarik
+        </p>
+      </section>
+      <section className="flex gap-5">
+        {posts.slice(0, 2).map((post) => (
           <Link
             href={`/blog/${post.post_slug}`}
             key={post.id}
-            className="group"
+            className="w-[50%] flex flex-col gap-4"
           >
-            <div className="bg-white rounded-lg shadow-md overflow-hidden h-full transition-transform duration-300 hover:scale-105">
-              {/* Wadah untuk gambar dengan aspek rasio 16/9 */}
-              <div className="relative w-full aspect-[16/9] bg-gray-200">
-                <Image
-                  // Gunakan URL gambar dari data post
-                  src={post.header_image_url}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Konten teks di bawah gambar */}
-              <div className="p-4">
-                <h2 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                  {new Date(post.created_at).toLocaleDateString("id-ID", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
+            <div className="relative w-full aspect-video rounded-2xl bg-zinc-500 overflow-hidden hover:group">
+              <Image
+                src={post.header_image_url}
+                alt={post.post_slug}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-primary/50">test</h2>
+              <h1 className="text-4xl">{post.title}</h1>
             </div>
           </Link>
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

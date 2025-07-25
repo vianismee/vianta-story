@@ -2,7 +2,7 @@
 
 import { useBlog } from "@/hooks/use-blog";
 import { use, useEffect } from "react";
-import { createClient } from "../../../../utils/supabase/client";
+import { createClient } from "../../../../../utils/supabase/client";
 
 export default function BlogPostPage({
   params,
