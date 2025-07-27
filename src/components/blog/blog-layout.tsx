@@ -1,20 +1,20 @@
 import { Post } from "@/types";
-import Blockquote from "@tiptap/extension-blockquote";
-import StarterKit from "@tiptap/starter-kit";
 import Image from "next/image";
-import { generateHTML } from "@tiptap/html";
+import { TiptapRender } from "./tiptap-render";
+import { Eye } from "lucide-react";
+import { BlogMatrix } from "./blog-matrix";
 
 interface BlogLayoutParams {
   post: Post;
 }
 
 export function BlogLayout({ post }: BlogLayoutParams) {
-  const extension = [StarterKit, Blockquote];
-  const content = generateHTML(post.content, extension);
-  console.log(content);
   return (
     <main className="w-full flex flex-col mx-auto gap-6 items-center">
-      <h1 className="text-4xl">{post.title}</h1>
+      <div className="w-full flex px-[100px] gap-5 justify-between">
+        <h1 className="text-4xl">{post.title}</h1>
+        <BlogMatrix postId={post.id} createdAt={post.created_at} />
+      </div>
       <div className="relative w-4xl aspect-video">
         <Image
           src={post.header_image_url}
@@ -23,6 +23,9 @@ export function BlogLayout({ post }: BlogLayoutParams) {
           className="object-cover rounded-2xl"
         />
       </div>
+      <article className="w-full px-[150px]">
+        <TiptapRender content={post.content} />
+      </article>
     </main>
   );
 }

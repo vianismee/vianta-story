@@ -8,3 +8,9 @@ export type Post = {
     title: string
     content: JSON
 }
+
+export type PostMatrix = {
+    id: number
+    view_count: number
+    like_count: number
+}
