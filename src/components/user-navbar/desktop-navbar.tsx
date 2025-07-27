@@ -11,15 +11,13 @@ export function DesktopNavbar({
     <nav className="w-full h-20 flex py-11 items-center border-b-2 border-b-primary/50">
       <div className="w-full max-w-6xl mx-auto px-8 flex justify-between items-center">
         <div className="relative h-10 w-40">
-          {" "}
-          {/* 🔧 UKURAN BISA DIOTAK-ATIK DI SINI */}
           <Link href="/">
             <Image
               src={"/asset/primary-logo.png"}
               alt="Primary Logo"
-              fill // Membuat gambar mengisi div induk
+              fill
               priority
-              className="object-contain" // Memastikan gambar tidak penyok/terpotong
+              className="object-contain"
             />
           </Link>
         </div>

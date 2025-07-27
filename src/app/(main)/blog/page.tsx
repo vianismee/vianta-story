@@ -1,50 +1,82 @@
 "use client";
 
-import { useBlog } from "@/hooks/use-blog"; // Pastikan path hook sudah benar
+import { useBlog } from "@/hooks/use-blog";
 import Link from "next/link";
-import Image from "next/image"; // Gunakan komponen Image dari Next.js untuk optimasi
+import Image from "next/image";
 
 export default function BlogPages() {
-  // Panggil hook untuk mendapatkan data dan statusnya
   const { posts, loading, error } = useBlog();
 
-  // Tampilkan pesan loading saat data sedang diambil
   if (loading) {
     return <div className="text-center p-10">Memuat postingan...</div>;
   }
 
-  // Tampilkan pesan error jika terjadi kesalahan
   if (error) {
     return <div className="text-center p-10 text-red-500">Error: {error}</div>;
   }
 
   return (
-    <main className="p-4 flex flex-col gap-5">
-      <section className="flex items-center justify-between w-full border-b-[3px] border-primary pb-6">
-        <h1 className="text-[40pt] w-[40%]">Our Blog Story</h1>
-        <p className="w-[30%] text-[16pt] border-l-[3px] border-primary/50 pl-4 font-medium">
+    // ✅ Gunakan padding yang konsisten untuk mobile dan desktop
+    <main className="p-4 md:p-8 flex flex-col gap-8">
+      {/* --- Bagian Header --- */}
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full border-b-[3px] border-primary pb-8">
+        <h1 className="text-4xl lg:text-6xl font-bold md:w-[50%]">
+          Our Blog Story
+        </h1>
+        <p className="mt-4 md:mt-0 md:w-[40%] text-base md:text-xl md:border-l-[3px] border-primary/50 md:pl-4 font-medium">
           Ini adalah cerita perjalanan kami mengunjungi tempat atau destinasi
-          menarik
+          menarik.
         </p>
       </section>
-      <section className="flex gap-5">
+
+      {/* --- Bagian Featured Posts (2 teratas) --- */}
+      <section className="flex flex-col md:flex-row gap-8 border-b-[3px] border-primary pb-8">
         {posts.slice(0, 2).map((post) => (
           <Link
             href={`/blog/${post.post_slug}`}
             key={post.id}
-            className="w-[50%] flex flex-col gap-4"
+            // ✅ Card akan otomatis mengambil 50% lebar karena parent-nya flex-row
+            className="w-full md:w-1/2 flex flex-col gap-4 group"
           >
-            <div className="relative w-full aspect-video rounded-2xl bg-zinc-500 overflow-hidden hover:group">
+            <div className="relative w-full aspect-video rounded-2xl bg-zinc-200 overflow-hidden">
               <Image
                 src={post.header_image_url}
                 alt={post.post_slug}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-300 group-hover:scale-115"
               />
             </div>
             <div className="flex flex-col gap-1">
-              <h2 className="text-primary/50">test</h2>
-              <h1 className="text-4xl">{post.title}</h1>
+              <h2 className="text-primary/70 text-sm font-semibold">
+                Inspiration
+              </h2>
+              <h1 className="text-2xl md:text-3xl font-bold">{post.title}</h1>
+            </div>
+          </Link>
+        ))}
+      </section>
+
+      {/* --- Bagian Grid Posts (sisanya) --- */}
+      {/* ✅ Menggunakan CSS Grid untuk layout yang lebih bersih dan kuat */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.slice(2).map((post) => (
+          // ✅ Lebar item diatur oleh grid-cols di parent, jadi tidak perlu w-[32%]
+          <Link
+            href={`/blog/${post.post_slug}`}
+            key={post.id}
+            className="flex flex-col gap-4 group"
+          >
+            <div className="relative w-full aspect-video rounded-2xl bg-zinc-200 overflow-hidden">
+              <Image
+                src={post.header_image_url}
+                alt={post.post_slug}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-115"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-primary/70 text-sm font-semibold">Travel</h2>
+              <h1 className="text-xl font-bold">{post.title}</h1>
             </div>
           </Link>
         ))}

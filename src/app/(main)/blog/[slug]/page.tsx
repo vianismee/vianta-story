@@ -3,6 +3,7 @@
 import { useBlog } from "@/hooks/use-blog";
 import { use, useEffect } from "react";
 import { createClient } from "../../../../../utils/supabase/client";
+import { BlogLayout } from "@/components/blog/blog-layout";
 
 export default function BlogPostPage({
   params,
@@ -46,9 +47,5 @@ export default function BlogPostPage({
       <div className="text-center p-10">404 | Postingan tidak ditemukan.</div>
     );
   }
-  return (
-    <div>
-      <p>{post.title}</p>
-    </div>
-  );
+  return <BlogLayout post={post} />;
 }
