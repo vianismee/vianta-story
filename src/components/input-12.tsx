@@ -36,10 +36,7 @@ const ImagePreview = ({
   </div>
 );
 
-export default function InputDemo({
-  onFileChange,
-  isUploading = false,
-}: ImageSelectorProps) {
+export default function InputDemo({ onFileChange }: ImageSelectorProps) {
   const [blogPostImage, setBlogPotImage] = useState<string | null>(null);
 
   return (

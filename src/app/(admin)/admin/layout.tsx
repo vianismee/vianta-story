@@ -20,7 +20,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider className="">
+    <SidebarProvider className="z-20">
       <SidebarLeft />
       <SidebarInset>
         <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2">
