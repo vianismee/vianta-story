@@ -1,7 +1,6 @@
 import { Post } from "@/types";
 import Image from "next/image";
 import { TiptapRender } from "./tiptap-render";
-import { Eye } from "lucide-react";
 import { BlogMatrix } from "./blog-matrix";
 
 interface BlogLayoutParams {

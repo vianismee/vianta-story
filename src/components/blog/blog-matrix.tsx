@@ -1,7 +1,6 @@
 import { useBlogMatrix } from "@/hooks/use-blog-matrix";
 import { useFormattedDate } from "@/hooks/use-formated-date";
 import { Eye } from "lucide-react";
-import { useState } from "react";
 
 interface BlogMatrixProps {
   postId: number;

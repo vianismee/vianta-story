@@ -3,7 +3,10 @@
 import { useBlog } from "@/hooks/use-blog";
 import Link from "next/link";
 import Image from "next/image";
-import { BlogCardSekeleton } from "@/components/blog/sekeleton/blog-card";
+import {
+  BlogCardSkeletonBesar,
+  BlogCardSkeletonKecil,
+} from "@/components/blog/sekeleton/blog-card";
 
 export default function BlogPages() {
   const { posts, loading, error } = useBlog();
@@ -23,8 +26,9 @@ export default function BlogPages() {
           menarik.
         </p>
       </section>
+
       {loading ? (
-        <BlogCardSekeleton />
+        <BlogCardSkeletonBesar />
       ) : (
         <section className="flex flex-col md:flex-row gap-8 border-b-[3px] border-primary pb-8">
           {posts.slice(0, 2).map((post) => (
@@ -53,28 +57,34 @@ export default function BlogPages() {
         </section>
       )}
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
-          <Link
-            href={`/blog/${post.post_slug}`}
-            key={post.id}
-            className="flex flex-col gap-4 group"
-          >
-            <div className="relative w-full aspect-video rounded-2xl bg-zinc-200 overflow-hidden">
-              <Image
-                src={post.header_image_url}
-                alt={post.post_slug}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-115"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <h2 className="text-primary/70 text-sm font-semibold">Travel</h2>
-              <h1 className="text-xl font-bold">{post.title}</h1>
-            </div>
-          </Link>
-        ))}
-      </section>
+      {loading ? (
+        <BlogCardSkeletonKecil />
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <Link
+              href={`/blog/${post.post_slug}`}
+              key={post.id}
+              className="flex flex-col gap-4 group"
+            >
+              <div className="relative w-full aspect-video rounded-2xl bg-zinc-200 overflow-hidden">
+                <Image
+                  src={post.header_image_url}
+                  alt={post.post_slug}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-115"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <h2 className="text-primary/70 text-sm font-semibold">
+                  Travel
+                </h2>
+                <h1 className="text-xl font-bold">{post.title}</h1>
+              </div>
+            </Link>
+          ))}
+        </section>
+      )}
     </main>
   );
 }
