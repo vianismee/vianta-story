@@ -7,12 +7,7 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <div className="relative aspect-square rounded-2xl overflow-hidden">
-              <Image
-                src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
-                alt="About Vianta Story"
-                fill
-                className="object-cover"
-              />
+              
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary rounded-2xl flex items-center justify-center">
               <div className="text-white text-center">
