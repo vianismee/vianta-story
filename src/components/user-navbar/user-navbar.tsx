@@ -13,10 +13,6 @@ export default function UserNavbar() {
       title: "Blog",
       path: "/blog",
     },
-    {
-      title: "About",
-      path: "/about",
-    },
   ];
 
   const isMobile = useIsMobile();

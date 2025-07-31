@@ -32,7 +32,7 @@ export function DesktopNavbar({
               </Link>
             ))}
           </div>
-          <InteractiveHoverButton>Contact Us!</InteractiveHoverButton>
+          <InteractiveHoverButton>Kontak Kami!</InteractiveHoverButton>
         </div>
       </div>
     </nav>

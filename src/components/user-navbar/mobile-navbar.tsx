@@ -18,7 +18,7 @@ export function MobileNavbar({ items }: MobileNavbarProps) {
       {/* Logo */}
       <Link href="/">
         <Image
-          src="/asset/primary-logo.png" // Ganti dengan path logo Anda
+          src="/asset/primary-logo.png"
           alt="Logo"
           width={60}
           height={32}
@@ -47,7 +47,7 @@ export function MobileNavbar({ items }: MobileNavbarProps) {
               </li>
             ))}
           </ul>
-          <InteractiveHoverButton>Contact Us!</InteractiveHoverButton>
+          <InteractiveHoverButton>Kontak Kami!</InteractiveHoverButton>
         </div>
       )}
     </nav>

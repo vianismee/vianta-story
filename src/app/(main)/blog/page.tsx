@@ -29,7 +29,7 @@ export default function BlogPages() {
 
       {loading ? (
         <BlogCardSkeletonBesar />
-      ) : (
+      ) : posts.length > 0 ? (
         <section className="flex flex-col md:flex-row gap-8 border-b-[3px] border-primary pb-8">
           {posts.slice(0, 2).map((post) => (
             <Link
@@ -55,6 +55,15 @@ export default function BlogPages() {
             </Link>
           ))}
         </section>
+      ) : (
+        <div className="flex flex-col items-center justify-center text-center py-20">
+          <h2 className="text-2xl font-semibold text-gray-600">
+            Masih Belum Ada Postingan
+          </h2>
+          <p className="text-gray-400 mt-2">
+            Silakan cek kembali di lain waktu.
+          </p>
+        </div>
       )}
 
       {loading ? (

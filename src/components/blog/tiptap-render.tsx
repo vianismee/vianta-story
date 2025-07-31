@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Blockquote from "@tiptap/extension-blockquote";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
