@@ -73,9 +73,7 @@ export function FeaturedPosts() {
 
         <div className="text-center mt-12">
           <Link href="/blog">
-            <InteractiveHoverButton className="text-lg px-8 py-3">
-              View All Stories
-            </InteractiveHoverButton>
+           
           </Link>
         </div>
       </div>
