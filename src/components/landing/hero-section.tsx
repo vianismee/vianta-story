@@ -9,13 +9,7 @@ export function HeroSection() {
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
-          alt="Cozy cafe background"
-          fill
-          className="object-cover"
-          priority
-        />
+       
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
