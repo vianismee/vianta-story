@@ -6,7 +6,15 @@ export function AboutSection() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-500"></div>
+            <div className="relative aspect-square rounded-2xl overflow-hidden ">
+              <Image
+                src="/asset/landing-page-profile.jpg"
+                alt="cover landingpage"
+                fill
+                className="object-top object-cover"
+                priority={true}
+              />
+            </div>
             <div className="absolute -bottom-6 -right-6 w-32 aspect-square bg-primary rounded-2xl flex items-center justify-center">
               <div className="text-white text-center">
                 <Image

@@ -6,7 +6,15 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden rounded-3xl mb-9">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-zinc-600"></div>
+        <div className="absolute inset-0 bg-black">
+          <Image
+            src="/asset/cover-landingpage.jpg"
+            alt="cover landingpage"
+            fill
+            className="object-cover opacity-40"
+            priority={true}
+          />
+        </div>
       </div>
       <div className="relative items-center flex flex-col space-y-6 z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <Image

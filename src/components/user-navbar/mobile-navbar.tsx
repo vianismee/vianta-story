@@ -14,7 +14,7 @@ export function MobileNavbar({ items }: MobileNavbarProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="w-full h-20 flex justify-between items-center px-4 border-b-2 border-primary/50 relative">
+    <nav className="w-full h-20 flex justify-between items-center px-4 border-b-2 border-primary/50 relative z-50">
       {/* Logo */}
       <Link href="/">
         <Image
