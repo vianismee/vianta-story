@@ -47,9 +47,6 @@ export default function BlogPages() {
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <h2 className="text-primary/70 text-sm font-semibold">
-                  Inspiration
-                </h2>
                 <h1 className="text-2xl md:text-3xl font-bold">{post.title}</h1>
               </div>
             </Link>
@@ -85,9 +82,6 @@ export default function BlogPages() {
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <h2 className="text-primary/70 text-sm font-semibold">
-                  Travel
-                </h2>
                 <h1 className="text-xl font-bold">{post.title}</h1>
               </div>
             </Link>

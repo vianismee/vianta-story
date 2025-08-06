@@ -189,3 +189,12 @@
     @apply my-6 pl-4 border-l-[4px] border-primary/70 font-serif font-semibold text-xl;
   }
 }
+
+@layer components {
+  .prose-list ul {
+    @apply list-disc list-outside my-4 pl-5 space-y-2;
+  }
+  .prose-list li {
+    @apply text-[12pt] font-sans;
+  }
+}

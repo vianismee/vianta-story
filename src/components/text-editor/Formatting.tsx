@@ -5,6 +5,7 @@ import {
   Heading1,
   Heading2,
   Italic,
+  List,
   Quote,
   Strikethrough,
 } from "lucide-react";
@@ -47,6 +48,11 @@ export function Menubar({ editor }: { editor: Editor | null }) {
       icon: <Quote className="size-4" />,
       onClick: () => editor.chain().focus().toggleBlockquote().run(),
       isActive: editor.isActive("blockquote"),
+    },
+    {
+      icon: <List className="size-4" />,
+      onClick: () => editor.chain().focus().toggleBulletList().run(),
+      isActive: editor.isActive("bulletList"),
     },
   ];
 

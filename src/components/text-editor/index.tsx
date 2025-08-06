@@ -7,6 +7,7 @@ import { Menubar } from "./Formatting";
 import { TextAlign } from "@tiptap/extension-text-align";
 import Blockquote from "@tiptap/extension-blockquote";
 import { Placeholder } from "@tiptap/extensions";
+import { BulletList, ListItem } from "@tiptap/extension-list";
 
 interface TextEditorProps {
   onChangeContent: (content: JSONContent) => void;
@@ -20,6 +21,8 @@ export default function TextEditor({
   const editor = useEditor({
     extensions: [
       StarterKit,
+      BulletList,
+      ListItem,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -41,9 +44,11 @@ export default function TextEditor({
     },
   });
   return (
-    <div>
+    <div className="">
       <Menubar editor={editor} />
-      <EditorContent editor={editor} />
+      <div className="prose-list">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }
