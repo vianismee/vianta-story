@@ -16,7 +16,7 @@ export function TiptapRender({ content }: TiptapRenderProps) {
 
   return (
     <div
-      className="w-full prose-xl"
+      className="w-full"
       dangerouslySetInnerHTML={{ __html: generatedHtml }}
     />
   );

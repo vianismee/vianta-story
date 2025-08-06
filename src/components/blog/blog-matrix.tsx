@@ -10,7 +10,7 @@ interface BlogMatrixProps {
 export function BlogMatrix({ postId, createdAt }: BlogMatrixProps) {
   const { viewCount } = useBlogMatrix(postId);
   return (
-    <div className=" flex flex-col gap-1 px-3 border-l-2 border-primary w-[30%]">
+    <div className=" flex md:flex-col gap-5 md:gap-1 px-3 md:border-l-2 border-primary md:w-[30%]">
       <p>{useFormattedDate(createdAt)}</p>
       <div className="inline-flex items-center gap-2">
         <Eye className="text-primary/50" />
