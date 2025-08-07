@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useBlog } from "@/hooks/use-blog";
-import { Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { createClient } from "../../../utils/supabase/client";
 import { toast } from "sonner";
@@ -66,14 +66,21 @@ export function HomeLayout() {
               <div className="flex w-[50%]">
                 <h1>{post.title}</h1>
               </div>
-              <Button
-                variant="destructive"
-                onClick={() => {
-                  handleDeletePost(post.header_image_url, post.id);
-                }}
-              >
-                <Trash2 /> Delete Blog
-              </Button>
+              <div className="flex gap-2">
+                <Link href={`/admin/edit-blog/${post.post_slug}`}>
+                  <Button size="icon">
+                    <Edit />
+                  </Button>
+                </Link>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    handleDeletePost(post.header_image_url, post.id);
+                  }}
+                >
+                  <Trash2 /> Delete Blog
+                </Button>
+              </div>
             </div>
           ))}
         </div>

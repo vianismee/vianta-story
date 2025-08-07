@@ -8,6 +8,7 @@ interface useUploadBlogProps {
     title: string
     content: JSONContent | null
     image: File | null
+    category: JSONContent | null
 }
 
 const titleSlug = (title: string) => {
@@ -23,7 +24,7 @@ const titleSlug = (title: string) => {
 
 export function useUploadBlog(){
     const [isLoading, setIsLoading] = useState(false)
-    const uploadPost = useCallback(async ({title, content, image}: useUploadBlogProps) => {
+    const uploadPost = useCallback(async ({title, content, image, category}: useUploadBlogProps) => {
         setIsLoading(true)
 
         const supabase = createClient()
@@ -54,6 +55,7 @@ export function useUploadBlog(){
                 post_slug: slug,
                 content: content,
                 header_image_url: headerImageUrl,
+                category: category,
             }
 
             const {data: insertedData, error: insertedError} = await supabase.from("blog_post").insert([finalPostData]).single()

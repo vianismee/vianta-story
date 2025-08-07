@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import InputDemo from "@/components/input-12";
 
 import { useUploadBlog } from "@/hooks/use-upload-blog";
+import { Option } from "@/components/ui/multiple-selector";
 
 const initialContent: JSONContent = {
   type: "doc",
@@ -26,7 +27,9 @@ export default function CreateBlogPage() {
 
   const [blogTitle, setBlogTittle] = useState("");
   const [blogContent, setBlogContent] = useState<JSONContent>(initialContent);
-  //  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [blogCategory, setBlogCategory] = useState<Option[]>([]);
+
+  console.log(blogCategory);
 
   // image file handler
   const [blogImage, setBlogImage] = useState<File | null>(null);
@@ -34,7 +37,6 @@ export default function CreateBlogPage() {
 
   const handleFileChange = (file: File) => {
     setBlogImage(file);
-    // Buat URL objek sementara untuk pratinjau
     setBlogImagePrev(URL.createObjectURL(file));
   };
 
@@ -44,7 +46,7 @@ export default function CreateBlogPage() {
     if (blogImagePrev) URL.revokeObjectURL(blogImagePrev);
     setBlogImage(null);
     setBlogImagePrev(null);
-    // Mungkin juga perlu mereset komponen InputDemo
+    setBlogCategory([]);
   };
   const handleSubmitePost = async () => {
     try {
@@ -52,6 +54,7 @@ export default function CreateBlogPage() {
         title: blogTitle,
         content: blogContent,
         image: blogImage,
+        category: blogCategory,
       };
       const newPost = await uploadPost(dataToUpload);
       toast.success(`Blog ${blogTitle} berhasil di Upload`);
@@ -75,7 +78,10 @@ export default function CreateBlogPage() {
               onChange={(e) => setBlogTittle(e.target.value)}
             />
           </div>
-          <MultipleSelectorControlled />
+          <MultipleSelectorControlled
+            value={blogCategory}
+            onChange={setBlogCategory}
+          />
         </div>
       </div>
       <TextEditor

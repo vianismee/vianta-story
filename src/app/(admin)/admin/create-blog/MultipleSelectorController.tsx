@@ -3,19 +3,27 @@ import React from "react";
 import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 import { Label } from "@/components/ui/label";
 
+interface MultipleSelectorControlledProps {
+  value: Option[];
+  onChange: (value: Option[]) => void;
+}
+
 const CATEGORY: Option[] = [
-  { label: "Caffe", value: "Caffe" },
-  { label: "Cozy", value: "Cozy" },
+  { label: "Coffeshop", value: "coffeshop" },
+  { label: "Hidden Gem", value: "hidden-gem" },
+  { label: "Travel", value: "travel" },
 ];
 
-const MultipleSelectorControlled = () => {
-  const [value, setValue] = React.useState<Option[]>([]);
+const MultipleSelectorControlled = ({
+  value,
+  onChange,
+}: MultipleSelectorControlledProps) => {
   return (
     <div className="flex flex-col gap-2">
       <Label>Category</Label>
       <MultipleSelector
         value={value}
-        onChange={setValue}
+        onChange={onChange}
         defaultOptions={CATEGORY}
         placeholder="Select Blog Category"
         className="bg-white"
